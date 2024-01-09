@@ -1,10 +1,14 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import { useSocket } from "@/context/socket";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div>Hello</div>
-  )
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket?.on("connect", () => {
+      console.log(socket.id);
+    });
+  }, [socket]);
+
+  return <div>Hello</div>;
 }
